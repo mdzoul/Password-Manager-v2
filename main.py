@@ -33,7 +33,7 @@ def save():
     email = email_input.get()
     password = password_input.get()
     new_data = {
-        website: {
+        website.lower(): {
             "email": email,
             "password": password
         }
@@ -70,11 +70,11 @@ def find_password():
     try:
         with open("password_manager.json", "r") as passwords:
             data = json.load(passwords)
-            data_dict = data[search_site]
+            data_dict = data[search_site.lower()]
     except FileNotFoundError:
         messagebox.showerror(title="Error", message="No Data File Found.")
     except KeyError:
-        messagebox.showerror(title="Error", message=f"No details for {search_site} exists.")
+        messagebox.showerror(title="Error", message=f"No details for {search_site.title()} exists.")
     else:
         messagebox.showinfo(title=f"{search_site}",
                             message=f"Email: {data_dict.get('email')} \nPassword: {data_dict.get('password')}")
